@@ -58,7 +58,19 @@
     <favorites_list name="androidrecord" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SubRecord.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/src/models/onetoone/SubRecord.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="7" selection-start="199" selection-end="199" vertical-scroll-proportion="0.25240386">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -83,11 +95,11 @@
         <option value="$PROJECT_DIR$/test/src/models/onetomany/Post.java" />
         <option value="$PROJECT_DIR$/test/src/ActiveCollectionTest.java" />
         <option value="$PROJECT_DIR$/test/src/models/onetoone/ExampleRecord.java" />
-        <option value="$PROJECT_DIR$/test/src/models/onetoone/SubRecord.java" />
         <option value="$PROJECT_DIR$/test/src/ModelTestCase.java" />
         <option value="$PROJECT_DIR$/test/src/ColumnHelperTest.java" />
         <option value="$PROJECT_DIR$/test/src/ActiveRecordBaseTest.java" />
         <option value="$PROJECT_DIR$/test/src/query/ResultSetFieldTranslatorTest.java" />
+        <option value="$PROJECT_DIR$/test/src/models/onetoone/SubRecord.java" />
       </list>
     </option>
   </component>
@@ -218,89 +230,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidrecord" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mocks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="AndroidTargetDevices" value="emulator-5554" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -440,7 +386,7 @@
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="CHOOSE_DEVICE_MANUALLY" value="false" />
+      <option name="CHOOSE_DEVICE_MANUALLY" value="true" />
       <option name="PREFERRED_AVD" value="" />
       <option name="COMMAND_LINE" value="" />
       <option name="WIPE_USER_DATA" value="false" />
@@ -516,22 +462,22 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32776934" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3242424" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Metrics" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928678" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24938875" sideWeight="0.6707132" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32925835" sideWeight="0.67424244" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32776934" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3262519" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32776934" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32776934" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287879" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -611,23 +557,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/ActiveRecordBaseTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="12" selection-start="9220" selection-end="9220" vertical-scroll-proportion="0.03816794">
-          <folding />
-        </state>
+        <state line="276" column="12" selection-start="9220" selection-end="9220" vertical-scroll-proportion="0.03816794" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/query/ResultSetFieldTranslatorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="18" selection-start="3635" selection-end="3635" vertical-scroll-proportion="0.5801527">
-          <folding />
-        </state>
+        <state line="112" column="18" selection-start="3635" selection-end="3635" vertical-scroll-proportion="0.5801527" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/models/onetoone/ExampleRecord.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="126" selection-end="126" vertical-scroll-proportion="0.1908397">
-          <folding />
-        </state>
+        <state line="5" column="13" selection-start="126" selection-end="126" vertical-scroll-proportion="0.1908397" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/models/hierarchy/Teacher.java">
@@ -640,45 +580,37 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/models/onetoone/SubRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="20" selection-start="89" selection-end="89" vertical-scroll-proportion="0.10895884">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/src/models/onetomany/Post.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="33" selection-start="150" selection-end="150" vertical-scroll-proportion="0.18159807">
-          <folding />
-        </state>
+        <state line="5" column="33" selection-start="150" selection-end="150" vertical-scroll-proportion="0.18159807" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/androidrecord/query/ResultSetFieldTranslator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="24" selection-start="598" selection-end="598" vertical-scroll-proportion="0.3816794">
-          <folding />
-        </state>
+        <state line="22" column="24" selection-start="598" selection-end="598" vertical-scroll-proportion="0.3816794" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/ActiveCollectionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="24" selection-start="394" selection-end="394" vertical-scroll-proportion="0.04021448">
-          <folding />
-        </state>
+        <state line="13" column="24" selection-start="394" selection-end="394" vertical-scroll-proportion="0.04021448" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/androidrecord/relations/RelationResolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="7" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/src/relations/RelationResolverTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="21" selection-start="794" selection-end="794" vertical-scroll-proportion="0.4047619">
-          <folding />
+        <state line="26" column="21" selection-start="794" selection-end="794" vertical-scroll-proportion="0.4047619" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/src/models/onetoone/SubRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="7" selection-start="199" selection-end="199" vertical-scroll-proportion="0.25240386">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -723,7 +655,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.6</last-edited>
+          <last-edited>Android 1.6 Platform</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -735,7 +667,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>example</last-edited>
+          <last-edited>test</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
