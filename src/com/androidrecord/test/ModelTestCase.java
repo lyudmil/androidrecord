@@ -31,11 +31,4 @@ public abstract class ModelTestCase extends TestCase {
 
         ActiveRecordBase.bootStrap(db);
     }
-
-    protected abstract Class getClassUnderTest();
-
-    public void testIsRegisteredInTheDatabaseManager() throws Exception {
-        DatabaseManager databaseManager = new DatabaseManager(context);
-        assertTrue(databaseManager.isRegistered(getClassUnderTest()));
-    }
 }
