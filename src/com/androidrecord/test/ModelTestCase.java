@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.test.mock.MockContext;
 import android.test.mock.MockResources;
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.db.DatabaseManager;
 import com.androidrecord.test.mocks.MockDatabase;
 import junit.framework.TestCase;
 

@@ -1,12 +1,10 @@
-
-
 import com.androidrecord.DateTime;
 import junit.framework.TestCase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.util.Calendar.*;
+import static java.util.Calendar.MAY;
 
 public class DateTimeTest extends TestCase {
 

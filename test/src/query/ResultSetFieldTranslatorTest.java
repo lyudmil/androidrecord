@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import com.androidrecord.DateTime;
 import com.androidrecord.test.mocks.MockCursor;
-import models.dateandtime.Album;
 import junit.framework.TestCase;
+import models.dateandtime.Album;
 
 import java.lang.reflect.Field;
 

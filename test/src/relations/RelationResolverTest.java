@@ -2,10 +2,10 @@ package relations;
 
 import com.androidrecord.query.QueryContext;
 import com.androidrecord.relations.RelationResolver;
+import junit.framework.TestCase;
 import models.onetomany.Blog;
 import models.onetoone.ExampleRecord;
 import models.onetoone.SubRecord;
-import junit.framework.TestCase;
 
 import java.lang.reflect.Field;
 

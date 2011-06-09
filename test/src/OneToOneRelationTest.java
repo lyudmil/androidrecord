@@ -1,9 +1,7 @@
-
-
 import com.androidrecord.relations.OneToOneRelation;
+import junit.framework.TestCase;
 import models.onetoone.ExampleRecord;
 import models.onetoone.SubRecord;
-import junit.framework.TestCase;
 
 public class OneToOneRelationTest extends TestCase {
     private OneToOneRelation relation;

@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.androidrecord.query.ResultSetFieldTranslator.*;
+import static com.androidrecord.query.ResultSetFieldTranslator.translate;
 
 public class Query<T extends ActiveRecordBase> {
     Database database;
