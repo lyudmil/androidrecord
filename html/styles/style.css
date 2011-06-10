@@ -1,0 +1,32 @@
+#nav {
+	margin-top: 5px;
+	border-bottom: 6px solid #133463;
+}
+
+#nav a {
+	color: #365FB7;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+#nav_links {
+	padding-top: 25px;
+}
+
+#screenshots {
+	background-color: lightgray;
+	height: 300 px;
+}
+
+#main {
+	margin-top: 50px;
+	font-size: 18px;
+}
+
+#copy {
+	margin-top: 40px;
+}
+
+#features {
+	margin-top: 20px;
+}
