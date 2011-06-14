@@ -92,6 +92,7 @@ public class ColumnValues {
     private void handleDateTime(Field field) throws IllegalAccessException {
         if (field.getType().equals(DateTime.class)) {
             DateTime dateTime = (DateTime) field.get(activeRecordBase);
+            if (dateTime == null) return;
             contentValues.put(field.getName(), dateTime.toString());
         }
     }

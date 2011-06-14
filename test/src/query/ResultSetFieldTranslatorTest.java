@@ -20,6 +20,7 @@ public class ResultSetFieldTranslatorTest extends TestCase {
     private Album album;
     private Field unitsSold;
     protected Field independent;
+    protected Field created_at;
 
     protected void setUp() throws Exception {
         super.setUp();
@@ -28,6 +29,7 @@ public class ResultSetFieldTranslatorTest extends TestCase {
         releaseDate = Album.class.getField("release_date");
         unitsSold = Album.class.getField("units_sold");
         independent = Album.class.getField("independent");
+        created_at = Album.class.getField("created_at");
 
         contentValues = new ContentValues();
         album = new Album();
@@ -107,6 +109,13 @@ public class ResultSetFieldTranslatorTest extends TestCase {
         contentValues.put("independent", 0);
         translate(independent).from(cursor()).to(album);
         assertEquals(false, album.independent);
+    }
+
+    public void testCopiesNullDateTimeValuesWithoutBlowingUp() throws Exception {
+        contentValues.put("created_at", (String) null);
+        translate(created_at).from(cursor()).to(album);
+
+        assertEquals(null, album.created_at);
     }
 
     private Cursor cursor() {

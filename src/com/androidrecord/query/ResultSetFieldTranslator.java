@@ -67,7 +67,9 @@ public enum ResultSetFieldTranslator {
         @Override
         public Object value() {
             int columnIndex = getResultSet().getColumnIndex(getField().getName());
-            return DateTime.from(getResultSet().getString(columnIndex));
+            String dateString = getResultSet().getString(columnIndex);
+            if (dateString == null) return null;
+            return DateTime.from(dateString);
         }
     };
 

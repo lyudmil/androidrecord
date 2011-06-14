@@ -27,6 +27,12 @@ public class ColumnValuesTest extends TestCase {
         assertEquals(1234, record.contentValues().get("integer_field"));
     }
 
+    public void testNullDateFields() throws Exception {
+        record.created_at = null;
+
+        assertEquals(null, record.contentValues().get("created_at"));
+    }
+
     private class Record extends ActiveRecordBase<Record> {
         public boolean boolean_field;
         public int integer_field;
