@@ -25,7 +25,7 @@ public class ActiveRecordBaseTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         this.db = new MockDatabase();
-        ActiveRecordBase.bootStrap(this.db, getApplicationContext());
+        ActiveRecordBase.bootStrap(this.db, null);
 
         exampleRecord = new ExampleRecord();
         subRecord = new SubRecord();
