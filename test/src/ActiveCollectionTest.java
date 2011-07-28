@@ -21,7 +21,7 @@ public class ActiveCollectionTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         db = new MockDatabase();
-        ActiveRecordBase.bootStrap(db);
+        ActiveRecordBase.bootStrap(db, null);
 
         blog = new Blog();
 

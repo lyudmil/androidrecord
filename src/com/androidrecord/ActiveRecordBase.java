@@ -1,6 +1,7 @@
 package com.androidrecord;
 
 import android.content.ContentValues;
+import android.content.Context;
 import com.androidrecord.db.Database;
 import com.androidrecord.query.ColumnValues;
 import com.androidrecord.query.CreateQuery;
@@ -19,6 +20,7 @@ import static com.androidrecord.utils.StringHelper.underscorize;
 
 public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
     private static Database database;
+    private static Context context;
 
     public Long id;
     public DateTime created_at = DateTime.now();
@@ -113,8 +115,13 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
         return fields;
     }
 
-    public static void bootStrap(Database database) {
+    public String getResourceString(int id) {
+        return context.getString(id);
+    }
+
+    public static void bootStrap(Database database, Context context) {
         ActiveRecordBase.database = database;
+        ActiveRecordBase.context = context;
     }
 
     private static class FieldComparator implements Comparator<Field> {

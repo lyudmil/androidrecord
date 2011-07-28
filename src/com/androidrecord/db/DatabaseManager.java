@@ -13,9 +13,11 @@ import static com.androidrecord.utils.StringHelper.underscorize;
 public class DatabaseManager extends SQLiteOpenHelper {
 
     private ArrayList<Class> registeredModels = new ArrayList<Class>();
+    private Context context;
 
     public DatabaseManager(Context context) {
         super(context, underscorize(context.getResources().getString(R.string.app_name)), null, 1);
+        this.context = context;
     }
 
     @Override
@@ -37,13 +39,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         registeredModels.add(record);
     }
 
-    public boolean isRegistered(Class activeRecordClass) {
-        return registeredModels.contains(activeRecordClass);
-    }
-
     public void bootStrapDatabase() {
         SQLiteDatabase writableDatabase = getWritableDatabase();
         Database database = new Database(writableDatabase);
-        ActiveRecordBase.bootStrap(database);
+        ActiveRecordBase.bootStrap(database, context);
     }
 }
