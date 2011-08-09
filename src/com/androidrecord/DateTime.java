@@ -7,6 +7,9 @@ import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
 
+/**
+ * A wrapper for GregorianCalendar that provides a consistent interface for timestamps and string formatting.
+ */
 public class DateTime implements Comparable<DateTime> {
 
     private static final String FORMAT = "yyyy-MM-dd HH:mm:ss";

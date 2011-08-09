@@ -5,6 +5,9 @@ import com.androidrecord.query.QueryContext;
 
 import java.lang.reflect.Field;
 
+/**
+ * Determines and runs sub-queries to establish one-to-one relationships within a query context.
+ */
 public enum RelationResolver {
     hasOne {
         @Override

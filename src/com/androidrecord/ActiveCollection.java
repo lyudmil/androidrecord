@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * A collection class for active records. It provides a consistent interface to model one-to-many relationships and
+ * lazy loading functionality.
+ *
+ * @param <T>
+ */
 public class ActiveCollection<T extends ActiveRecordBase> implements Iterable<T> {
     private List<T> records = new ArrayList<T>();
     private ActiveRecordBase owner;

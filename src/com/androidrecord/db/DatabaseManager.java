@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 import static com.androidrecord.utils.StringHelper.underscorize;
 
+/**
+ * Once the models are registered from the root activity and bootStrapDatabase is called, it creates a database for
+ * the application if one does not already exist.
+ */
 public class DatabaseManager extends SQLiteOpenHelper {
 
     private ArrayList<Class> registeredModels = new ArrayList<Class>();

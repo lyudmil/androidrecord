@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Each time the user runs a query, it is executed in its own context to resolve all the one-to-one relationships for
+ * that record. One-to-many relationships are lazily loaded and are handled differently.
+ *
+ * @see com.androidrecord.ActiveCollection
+ */
 public class QueryContext<T extends ActiveRecordBase> {
     private Database database;
     private T record;

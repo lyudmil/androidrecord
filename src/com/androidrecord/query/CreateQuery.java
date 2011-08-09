@@ -16,6 +16,10 @@ public class CreateQuery {
         this.activeRecordClass = activeRecordClass;
     }
 
+    public String build() {
+        return "create table " + ActiveRecordBase.tableNameFor(this.activeRecordClass) + " (" + fieldSpecifications() + ");";
+    }
+
     private static boolean representsRelation(Field field) {
         Class<?> fieldType = field.getType();
         if (ActiveRecordBase.class.isAssignableFrom(fieldType)) return true;
@@ -23,11 +27,7 @@ public class CreateQuery {
     }
 
     private static boolean representsBelonging(Field field) {
-         return field.isAnnotationPresent(BelongsTo.class);
-    }
-
-    public String build() {
-        return "create table " + ActiveRecordBase.tableNameFor(this.activeRecordClass) + " (" + fieldSpecifications() + ");";
+        return field.isAnnotationPresent(BelongsTo.class);
     }
 
     private String fieldSpecifications() {
