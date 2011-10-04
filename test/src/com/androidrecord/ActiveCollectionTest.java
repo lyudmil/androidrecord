@@ -1,7 +1,5 @@
 package com.androidrecord;
 
-import com.androidrecord.ActiveCollection;
-import com.androidrecord.ActiveRecordBase;
 import com.androidrecord.test.mocks.MockDatabase;
 import junit.framework.TestCase;
 import models.onetomany.Blog;

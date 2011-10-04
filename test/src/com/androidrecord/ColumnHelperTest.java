@@ -1,6 +1,5 @@
 package com.androidrecord;
 
-import com.androidrecord.DateTime;
 import com.androidrecord.query.ColumnHelper;
 import junit.framework.TestCase;
 

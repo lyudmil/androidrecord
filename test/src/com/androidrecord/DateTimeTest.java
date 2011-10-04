@@ -1,6 +1,5 @@
 package com.androidrecord;
 
-import com.androidrecord.DateTime;
 import junit.framework.TestCase;
 
 import java.text.SimpleDateFormat;

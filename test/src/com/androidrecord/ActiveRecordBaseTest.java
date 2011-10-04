@@ -1,8 +1,6 @@
 package com.androidrecord;
 
 import android.content.ContentValues;
-import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.DateTime;
 import com.androidrecord.test.mocks.MockDatabase;
 import junit.framework.TestCase;
 import models.hierarchy.Major;
