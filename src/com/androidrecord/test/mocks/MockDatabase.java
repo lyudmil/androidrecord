@@ -30,7 +30,9 @@ public class MockDatabase extends Database {
     public Long insert(String tableName, ContentValues contentValues) {
         insertCalled = true;
         updateLastQueryParameters(tableName, contentValues, null);
-        return nextIdToReturn;
+        long id = nextIdToReturn;
+        nextIdToReturn++;
+        return id;
     }
 
     @Override
