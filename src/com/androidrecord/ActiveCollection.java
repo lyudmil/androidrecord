@@ -104,4 +104,9 @@ public class ActiveCollection<T extends ActiveRecordBase> implements Iterable<T>
         load();
         return records;
     }
+
+    public int indexOf(T record) {
+        load();
+        return records.indexOf(record);
+    }
 }
