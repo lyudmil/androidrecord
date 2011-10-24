@@ -109,4 +109,8 @@ public class ActiveCollection<T extends ActiveRecordBase> implements Iterable<T>
         load();
         return records.indexOf(record);
     }
+
+    public void clear() {
+        records.clear();
+    }
 }
