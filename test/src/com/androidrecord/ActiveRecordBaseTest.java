@@ -234,6 +234,15 @@ public class ActiveRecordBaseTest extends TestCase {
         assertEquals(exampleRecord.id, found.record.id);
     }
 
+    public void testFindOwnedRecordWithoutAnOwner() throws Exception {
+        db.firstReturn(subRecord).thenReturnEmptyResult();
+
+        SubRecord found = new SubRecord().find(subRecord.id);
+
+        assertEquals(subRecord.id, found.id);
+        assertEquals(null, found.record);
+    }
+
     public void testFindRecordThatOwnsManyRecords() throws Exception {
         db.firstReturn(blog).thenReturn(Arrays.asList(post1, post2)).forever();
 

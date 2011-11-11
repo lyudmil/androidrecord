@@ -19,7 +19,7 @@ public class OneToOneRelation {
     }
 
     public boolean connectOwner(ActiveRecordBase owner) {
-        if (isOwnerIdUnexpected(owner.id)) return false;
+        if (owner == null || isOwnerIdUnexpected(owner.id)) return false;
 
         saveOwner(owner);
         if (owned != null) connect();
@@ -43,6 +43,7 @@ public class OneToOneRelation {
     }
 
     private void saveOwned(ActiveRecordBase owned) {
+        if (owned == null) return;
         this.owned = owned;
         lookUpOwnedField();
     }
@@ -89,6 +90,7 @@ public class OneToOneRelation {
     }
 
     private void connectOwned() throws IllegalAccessException {
+        if (ownedField == null) return;
         ownedField.set(owned, owner);
     }
 

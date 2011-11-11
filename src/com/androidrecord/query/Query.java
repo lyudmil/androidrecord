@@ -39,7 +39,7 @@ public class Query<T extends ActiveRecordBase> {
 
     protected T recordFrom(Cursor result) {
         T activeRecord = newRecord();
-        if (result.getCount() == 0) return activeRecord;
+        if (result.getCount() == 0) return null;
 
         List<Field> sortedFields = activeRecord.getSortedFields();
         for (Field field : sortedFields) {
