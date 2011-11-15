@@ -1,8 +1,7 @@
 package com.androidrecord;
 
 import android.content.ContentValues;
-import com.androidrecord.test.mocks.MockDatabase;
-import junit.framework.TestCase;
+import com.androidrecord.test.ModelTestCase;
 import models.hierarchy.Major;
 import models.hierarchy.Student;
 import models.hierarchy.Teacher;
@@ -13,9 +12,8 @@ import models.onetoone.SubRecord;
 
 import java.util.Arrays;
 
-public class ActiveRecordBaseTest extends TestCase {
+public class ActiveRecordBaseTest extends ModelTestCase {
 
-    private MockDatabase db;
     private ExampleRecord exampleRecord;
     private SubRecord subRecord;
     private Blog blog;
@@ -24,8 +22,7 @@ public class ActiveRecordBaseTest extends TestCase {
 
     @Override
     public void setUp() throws Exception {
-        this.db = new MockDatabase();
-        ActiveRecordBase.bootStrap(this.db, null);
+        super.setUp();
 
         exampleRecord = new ExampleRecord();
         subRecord = new SubRecord();
@@ -196,10 +193,7 @@ public class ActiveRecordBaseTest extends TestCase {
         record.field1 = "some value";
         record.save();
 
-        assertTrue(db.updateCalled);
-        assertEquals("example_records", db.lastQueryParameters.get("tableName"));
-        assertEquals(record.contentValues(), db.lastQueryParameters.get("contentValues"));
-        assertEquals("id=1", db.lastQueryParameters.get("whereClause"));
+        assertUpdated(record);
     }
 
     public void testFindRecord() throws Exception {
@@ -309,5 +303,12 @@ public class ActiveRecordBaseTest extends TestCase {
         assertEquals(now.getDay(), exampleRecord.created_at.getDay());
         assertEquals(now.getHour(), exampleRecord.created_at.getHour());
         assertEquals(now.getMinutes(), exampleRecord.created_at.getMinutes());
+    }
+
+    public void testCanCompactId() throws Exception {
+        exampleRecord.compactId();
+
+        assertTrue(db.compactIdCalled);
+        assertEquals(exampleRecord.tableName(), db.lastQueryParameters.get("tableName"));
     }
 }

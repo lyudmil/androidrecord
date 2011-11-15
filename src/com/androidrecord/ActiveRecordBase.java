@@ -190,6 +190,10 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
         ActiveRecordBase.context = context;
     }
 
+    protected void compactId() {
+        database.compactId(tableName());
+    }
+
     private static class FieldComparator implements Comparator<Field> {
         public int compare(Field field1, Field field2) {
             if (field1.getName().equals("id")) return -1;

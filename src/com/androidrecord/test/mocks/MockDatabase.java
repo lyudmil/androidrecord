@@ -21,6 +21,7 @@ public class MockDatabase extends Database {
     public boolean updateCalled = false;
     public boolean selectCalled = false;
     public boolean deleteCalled = false;
+    public boolean compactIdCalled = false;
 
     public MockDatabase() {
         super(null);
@@ -68,6 +69,12 @@ public class MockDatabase extends Database {
     public void delete(String tableName, String whereClause) {
         deleteCalled = true;
         updateLastQueryParameters(tableName, null, whereClause);
+    }
+
+    @Override
+    public void compactId(String tableName) {
+        compactIdCalled = true;
+        updateLastQueryParameters(tableName, null, null);
     }
 
     public MockDatabase firstReturn(ActiveRecordBase recordToFind) {

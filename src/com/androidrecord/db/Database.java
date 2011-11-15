@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Database {
+    private static final String COMPACT_ID_QUERY_FORMAT = "update sqlite_sequence set seq=(select max(id) from %s) where name='%s'";
     private SQLiteDatabase database;
 
     public Database(SQLiteDatabase database) {
@@ -29,5 +30,9 @@ public class Database {
 
     public Cursor selectAll(String tableName) {
         return select(tableName, null);
+    }
+
+    public void compactId(String tableName) {
+        database.execSQL(String.format(COMPACT_ID_QUERY_FORMAT, tableName, tableName));
     }
 }
