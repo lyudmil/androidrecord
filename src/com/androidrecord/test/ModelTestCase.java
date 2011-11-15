@@ -25,6 +25,13 @@ public abstract class ModelTestCase extends TestCase {
         ActiveRecordBase.bootStrap(db, context);
     }
 
+    public void assertUpdated(ActiveRecordBase record) {
+        assertTrue(db.updateCalled);
+        assertEquals(record.tableName(), db.lastQueryParameters.get("tableName"));
+        assertEquals(record.contentValues(), db.lastQueryParameters.get("contentValues"));
+        assertEquals("id=" + record.id, db.lastQueryParameters.get("whereClause"));
+    }
+
     public class MyMockContext extends MockContext {
         private Map<Integer, String> resources = new HashMap<Integer, String>();
 
