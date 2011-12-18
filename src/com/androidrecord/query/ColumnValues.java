@@ -62,10 +62,15 @@ public class ColumnValues {
 
     private void handleOwned(Field field) throws IllegalAccessException {
         ActiveRecordBase owner = (ActiveRecordBase) field.get(activeRecordBase);
-        if (owner == null) return;
+        String ownerColumnName = field.getName() + "_id";
+
+        if (owner == null) {
+            contentValues.put(ownerColumnName, (Long) null);
+            return;
+        }
         if (owner.isTransient()) throw new RuntimeException("Entity is owned by an entity that has not been saved.");
 
-        contentValues.put(field.getName() + "_id", owner.id);
+        contentValues.put(ownerColumnName, owner.id);
     }
 
     private void handleOwning(Field field) throws IllegalAccessException {
