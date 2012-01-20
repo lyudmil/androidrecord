@@ -21,4 +21,13 @@ public class MigrationsTest extends InstrumentationTestCase {
         assertEquals("drop table stuff;", migrations.loadMigrationNumber(1));
         assertEquals("drop column id from students;", migrations.loadMigrationNumber(2));
     }
+
+    public void testHandlesMissingMigrations() throws Exception {
+        try {
+            migrations.loadMigrationNumber(4);
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("Missing migration: migrations/4.sql", e.getMessage());
+        }
+    }
 }
