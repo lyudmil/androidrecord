@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.androidrecord.ActiveRecordBase;
 import com.androidrecord.R;
+import com.androidrecord.migrations.Migrations;
 
 import java.util.ArrayList;
 
@@ -18,10 +19,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     private ArrayList<Class> registeredModels = new ArrayList<Class>();
     private Context context;
+    private Migrations migrations;
+
+    private DatabaseManager(Context context, Migrations migrations) {
+        super(context, underscorize(context.getResources().getString(R.string.app_name)), null, migrations.latest());
+        this.migrations = migrations;
+        this.context = context;
+    }
 
     public DatabaseManager(Context context) {
-        super(context, underscorize(context.getResources().getString(R.string.app_name)), null, 1);
-        this.context = context;
+        this(context, new Migrations(context.getAssets()));
     }
 
     @Override
@@ -37,6 +44,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        for (int i = oldVersion; i <= newVersion; i++) {
+            sqLiteDatabase.execSQL(migrations.loadMigrationNumber(i));
+        }
     }
 
     public void registerModel(Class<? extends ActiveRecordBase> record) {

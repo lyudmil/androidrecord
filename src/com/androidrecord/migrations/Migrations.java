@@ -14,14 +14,22 @@ public class Migrations {
         this.assets = assets;
     }
 
-    public int latest() throws IOException {
-        String[] migrations = assets.list(MIGRATIONS_SUB_DIRECTORY);
+    public int latest() {
+        String[] migrations = listMigrationFiles();
         int latestVersion = 1;
         for (String migration : migrations) {
             int migrationNumber = migrationNumberFrom(migration);
             if (migrationNumber > latestVersion) latestVersion = migrationNumber;
         }
         return latestVersion;
+    }
+
+    private String[] listMigrationFiles() {
+        try {
+            return assets.list(MIGRATIONS_SUB_DIRECTORY);
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot open " + MIGRATIONS_SUB_DIRECTORY + " folder.");
+        }
     }
 
     private int migrationNumberFrom(String fileName) {
@@ -32,13 +40,13 @@ public class Migrations {
         }
     }
 
-    public String loadMigrationNumber(int migrationNumber) throws IOException {
+    public String loadMigrationNumber(int migrationNumber) {
         String file = MIGRATIONS_SUB_DIRECTORY + "/" + migrationNumber + ".sql";
 
         return contentsOf(file);
     }
 
-    private String contentsOf(String path) throws IOException {
+    private String contentsOf(String path) {
         try {
             return contentsOfFileAsString(path);
         } catch (IOException e) {
