@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Migrations {
+    public static final String MIGRATIONS_SUB_DIRECTORY = "migrations";
     private AssetManager assets;
 
     public Migrations(AssetManager assets) {
@@ -14,7 +15,7 @@ public class Migrations {
     }
 
     public int latest() throws IOException {
-        String[] migrations = assets.list("migrations");
+        String[] migrations = assets.list(MIGRATIONS_SUB_DIRECTORY);
         int latestVersion = 1;
         for (String migration : migrations) {
             int migrationNumber = migrationNumberFrom(migration);
@@ -32,7 +33,7 @@ public class Migrations {
     }
 
     public String loadMigrationNumber(int migrationNumber) throws IOException {
-        String file = "migrations/" + migrationNumber + ".sql";
+        String file = MIGRATIONS_SUB_DIRECTORY + "/" + migrationNumber + ".sql";
 
         return contentsOf(file);
     }

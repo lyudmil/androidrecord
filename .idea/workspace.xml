@@ -82,7 +82,7 @@
       <file leaf-file-name="Migrations.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/androidrecord/migrations/Migrations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="55" selection-start="815" selection-end="815" vertical-scroll-proportion="0.97590363">
+            <state line="35" column="48" selection-start="1257" selection-end="1257" vertical-scroll-proportion="1.2650602">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -768,7 +768,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/androidrecord/migrations/Migrations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="55" selection-start="815" selection-end="815" vertical-scroll-proportion="0.97590363">
+        <state line="35" column="48" selection-start="1257" selection-end="1257" vertical-scroll-proportion="1.2650602">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
