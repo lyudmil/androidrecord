@@ -2,6 +2,7 @@ package com.androidrecord.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.androidrecord.ActiveRecordBase;
 import com.androidrecord.R;
@@ -44,7 +45,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        for (int i = oldVersion; i <= newVersion; i++) {
+        try {
+            runNecessaryMigrations(sqLiteDatabase, oldVersion, newVersion);
+        } catch (SQLiteException e) {
+            throw new RuntimeException("Problem running migrations.", e);
+        }
+    }
+
+    private void runNecessaryMigrations(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        int nextVersion = oldVersion + 1;
+        for (int i = nextVersion; i <= newVersion; i++) {
             sqLiteDatabase.execSQL(migrations.loadMigrationNumber(i));
         }
     }
