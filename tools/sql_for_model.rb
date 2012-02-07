@@ -2,11 +2,11 @@
 require 'yaml'
 require 'java'
 
-$CONFIG = YAML.load(File.open(File.dirname(__FILE__) + '/config.yaml'))
+config = YAML.load(File.open(File.dirname(__FILE__) + '/config.yaml'))
 
-require $CONFIG["android-jar-path"]
+require config["android-jar-path"]
 
-$CLASSPATH << $CONFIG["output-path"]
+$CLASSPATH << config["output-path"]
 
 java_import com.androidrecord.ActiveRecordBase
 
