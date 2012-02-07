@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Migrations {
     public static final String MIGRATIONS_SUB_DIRECTORY = "migrations";
@@ -40,10 +41,10 @@ public class Migrations {
         }
     }
 
-    public String loadMigrationNumber(int migrationNumber) {
+    public String[] loadMigrationNumber(int migrationNumber) {
         String file = MIGRATIONS_SUB_DIRECTORY + "/" + migrationNumber + ".sql";
 
-        return contentsOf(file);
+        return contentsOf(file).split(";");
     }
 
     private String contentsOf(String path) {

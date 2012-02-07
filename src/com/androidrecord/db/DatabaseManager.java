@@ -8,8 +8,6 @@ import com.androidrecord.ActiveRecordBase;
 import com.androidrecord.R;
 import com.androidrecord.migrations.Migrations;
 
-import java.util.ArrayList;
-
 import static com.androidrecord.utils.StringHelper.underscorize;
 
 /**
@@ -18,7 +16,6 @@ import static com.androidrecord.utils.StringHelper.underscorize;
  */
 public class DatabaseManager extends SQLiteOpenHelper {
 
-    private ArrayList<Class> registeredModels = new ArrayList<Class>();
     private Context context;
     private Migrations migrations;
 
@@ -34,33 +31,28 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        createTables(database);
-    }
-
-    private void createTables(SQLiteDatabase database) {
-        for (Class registeredModel : registeredModels) {
-            database.execSQL(ActiveRecordBase.createSqlFor(registeredModel));
-        }
+        runAllMigrations(database);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         try {
-            runNecessaryMigrations(sqLiteDatabase, oldVersion, newVersion);
+            runMigrations(sqLiteDatabase, oldVersion + 1, newVersion);
         } catch (SQLiteException e) {
             throw new RuntimeException("Problem running migrations.", e);
         }
     }
 
-    private void runNecessaryMigrations(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        int nextVersion = oldVersion + 1;
-        for (int i = nextVersion; i <= newVersion; i++) {
-            sqLiteDatabase.execSQL(migrations.loadMigrationNumber(i));
-        }
+    private void runAllMigrations(SQLiteDatabase database) {
+        runMigrations(database, 1, migrations.latest());
     }
 
-    public void registerModel(Class<? extends ActiveRecordBase> record) {
-        registeredModels.add(record);
+    private void runMigrations(SQLiteDatabase sqLiteDatabase, int initialVersion, int finalVersion) {
+        for (int i = initialVersion; i <= finalVersion; i++) {
+            for (String statement : migrations.loadMigrationNumber(i)) {
+                sqLiteDatabase.execSQL(statement);
+            }
+        }
     }
 
     public void bootStrapDatabase() {
