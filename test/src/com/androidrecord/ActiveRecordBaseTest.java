@@ -2,6 +2,7 @@ package com.androidrecord;
 
 import android.content.ContentValues;
 import com.androidrecord.test.ModelTestCase;
+import models.dateandtime.Album;
 import models.hierarchy.Major;
 import models.hierarchy.Student;
 import models.hierarchy.Teacher;
@@ -9,6 +10,7 @@ import models.onetomany.Blog;
 import models.onetomany.Post;
 import models.onetoone.ExampleRecord;
 import models.onetoone.SubRecord;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -310,5 +312,52 @@ public class ActiveRecordBaseTest extends ModelTestCase {
 
         assertTrue(db.compactIdCalled);
         assertEquals(exampleRecord.tableName(), db.lastQueryParameters.get("tableName"));
+    }
+
+    public void testAsJsonWithoutRelations() throws Exception {
+        Album album = new Album();
+        album.id = (long) 44;
+        album.title = "Illmatic";
+        album.release_date = DateTime.from("1994-04-19 00:00:00");
+        album.independent = false;
+        album.units_sold = 1000000;
+
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("id", (long) 44);
+        expectedJson.put("title", "Illmatic");
+        expectedJson.put("release_date", "1994-04-19 00:00:00");
+        expectedJson.put("independent", false);
+        expectedJson.put("units_sold", 1000000);
+        expectedJson.put("created_at", DateTime.now().toString());
+
+        assertEquals(expectedJson.toString(), album.asJson());
+    }
+
+    public void testAsJsonForOneToManyOwningRecords() throws Exception {
+        Blog blog = new Blog();
+        blog.id = (long) 23;
+
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("id", (long) 23);
+        expectedJson.put("created_at", DateTime.now());
+
+        assertEquals(expectedJson.toString(), blog.asJson());
+    }
+
+    public void testAsJsonForOneToOneOwningRecords() throws Exception {
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("id", (long) 321);
+        expectedJson.put("created_at", DateTime.now());
+
+        assertEquals(expectedJson.toString(), exampleRecord.asJson());
+    }
+
+    public void testAsJsonForOwnedRecords() throws Exception {
+        JSONObject expectedJson = new JSONObject();
+        expectedJson.put("id", (long) 1);
+        expectedJson.put("blog_id", blog.id);
+        expectedJson.put("created_at", DateTime.now());
+
+        assertEquals(expectedJson.toString(), post1.asJson());
     }
 }

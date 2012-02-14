@@ -6,7 +6,12 @@ import com.androidrecord.db.Database;
 import com.androidrecord.query.ColumnValues;
 import com.androidrecord.query.CreateQuery;
 import com.androidrecord.query.QueryContext;
+import com.androidrecord.relations.BelongsTo;
+import com.androidrecord.relations.HasMany;
+import com.androidrecord.relations.HasOne;
 import com.androidrecord.relations.RelationResolver;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -192,6 +197,43 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
 
     protected void compactId() {
         database.compactId(tableName());
+    }
+
+    public String asJson() {
+        return buildPrototypeFromFields().toString();
+    }
+
+    private JSONObject buildPrototypeFromFields() {
+        JSONObject prototype = new JSONObject();
+        for (Field field : getSortedFields()) {
+            try {
+                includeField(field, prototype);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return prototype;
+    }
+
+    private void includeField(Field field, JSONObject prototype) throws JSONException, IllegalAccessException {
+        if (fieldRepresentsOwnedRecord(field)) return;
+        if (currentObjectOwnedByRecordRepresentedIn(field)) includeOwningField(field, prototype);
+        else prototype.put(field.getName(), field.get(this));
+    }
+
+    private boolean fieldRepresentsOwnedRecord(Field field) {
+        return field.isAnnotationPresent(HasMany.class) || field.isAnnotationPresent(HasOne.class);
+    }
+
+    private boolean currentObjectOwnedByRecordRepresentedIn(Field field) {
+        return field.isAnnotationPresent(BelongsTo.class);
+    }
+
+    private void includeOwningField(Field field, JSONObject prototype) throws IllegalAccessException, JSONException {
+        ActiveRecordBase owningRecord = (ActiveRecordBase) field.get(this);
+        prototype.put(field.getName() + "_id", owningRecord.id);
     }
 
     private static class FieldComparator implements Comparator<Field> {
