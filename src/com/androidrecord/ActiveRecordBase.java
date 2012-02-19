@@ -34,6 +34,7 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
 
     public Long id;
     public DateTime created_at = DateTime.now();
+    public DateTime updated_at;
 
     protected ActiveRecordBase() {
         initializeCollections();
@@ -65,6 +66,7 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
             created_at = DateTime.now();
             id = database.insert(tableName(), contentValues());
         } else {
+            updated_at = DateTime.now();
             database.update(tableName(), contentValues(), whereIdMatches());
         }
     }
