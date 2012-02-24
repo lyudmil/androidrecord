@@ -55,6 +55,7 @@ public class MockDatabase extends Database {
             if (forever) resultsToReturn = new ArrayList<MockCursor>(usedRecords);
             else throw new RuntimeException("No more results to return.");
         }
+        updateLastQueryParameters(tableName, new ContentValues(), selection);
         return returnNextRecord();
     }
 
@@ -122,5 +123,9 @@ public class MockDatabase extends Database {
 
     public ContentValues lastQueryContents() {
         return (ContentValues) lastQueryParameters.get("contentValues");
+    }
+
+    public String lastWhereClause() {
+        return (String) lastQueryParameters.get("whereClause");
     }
 }
