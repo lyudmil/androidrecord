@@ -64,11 +64,19 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
     public void save() {
         if (isTransient()) {
             created_at = DateTime.now();
-            id = database.insert(tableName(), contentValues());
+            insert();
         } else {
             updated_at = DateTime.now();
-            database.update(tableName(), contentValues(), whereIdMatches());
+            update();
         }
+    }
+
+    protected void insert() {
+        id = database.insert(tableName(), contentValues());
+    }
+
+    protected void update() {
+        database.update(tableName(), contentValues(), whereIdMatches());
     }
 
     /**
