@@ -1,7 +1,7 @@
 package models.onetomany;
 
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.BelongsTo;
+import com.androidrecord.associations.BelongsTo;
 
 public class Post extends ActiveRecordBase<Post> {
 

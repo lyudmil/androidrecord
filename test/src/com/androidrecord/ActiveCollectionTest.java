@@ -106,14 +106,14 @@ public class ActiveCollectionTest extends TestCase {
     }
 
     public void testLoadsCollectionFromTheDatabaseOnAccess() throws Exception {
-        setUpRelationships();
+        setUpAssociations();
         assertCollectionSize(0);
 
         assertEquals(3, blog.posts.size());
     }
 
     public void testLoadsCollectionWhenIterating() throws Exception {
-        setUpRelationships();
+        setUpAssociations();
         assertCollectionSize(0);
 
         for (Post post : posts) {}
@@ -122,7 +122,7 @@ public class ActiveCollectionTest extends TestCase {
     }
 
     public void testLoadsCollectionWhenEvaluatingContain() throws Exception {
-        setUpRelationships();
+        setUpAssociations();
         assertCollectionSize(0);
 
         posts.contain(post1);
@@ -131,7 +131,7 @@ public class ActiveCollectionTest extends TestCase {
     }
 
     public void testLoadsCollectionWhenEvaluatingAreEmpty() throws Exception {
-        setUpRelationships();
+        setUpAssociations();
         assertCollectionSize(0);
 
         posts.areEmpty();
@@ -139,7 +139,7 @@ public class ActiveCollectionTest extends TestCase {
         assertCollectionSize(3);
     }
 
-    private void setUpRelationships() {
+    private void setUpAssociations() {
         blog.id = (long) 151;
 
         post1.blog = blog;

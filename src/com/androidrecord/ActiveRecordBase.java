@@ -6,10 +6,10 @@ import com.androidrecord.db.Database;
 import com.androidrecord.query.ColumnValues;
 import com.androidrecord.query.CreateQuery;
 import com.androidrecord.query.QueryContext;
-import com.androidrecord.relations.BelongsTo;
-import com.androidrecord.relations.HasMany;
-import com.androidrecord.relations.HasOne;
-import com.androidrecord.relations.RelationResolver;
+import com.androidrecord.associations.BelongsTo;
+import com.androidrecord.associations.HasMany;
+import com.androidrecord.associations.HasOne;
+import com.androidrecord.associations.AssociationResolver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.androidrecord.relations.RelationResolver.relation;
+import static com.androidrecord.associations.AssociationResolver.association;
 import static com.androidrecord.utils.StringHelper.pluralize;
 import static com.androidrecord.utils.StringHelper.underscorize;
 
@@ -171,11 +171,11 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
      *
      * @param context   the current query context
      * @see             QueryContext
-     * @see             RelationResolver
+     * @see             com.androidrecord.associations.AssociationResolver
      */
-    public void linkRelations(QueryContext<T> context) {
+    public void linkAssociations(QueryContext<T> context) {
         for (Field field : getClass().getFields()) {
-            RelationResolver resolver = relation(field).on(this).within(context);
+            AssociationResolver resolver = association(field).on(this).within(context);
             resolver.establish();
         }
     }

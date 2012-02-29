@@ -2,11 +2,11 @@ package com.androidrecord.query;
 
 import android.database.Cursor;
 import com.androidrecord.ActiveRecordBase;
+import com.androidrecord.associations.OneToOneAssociation;
 import com.androidrecord.db.Database;
-import com.androidrecord.relations.BelongsTo;
-import com.androidrecord.relations.HasMany;
-import com.androidrecord.relations.HasOne;
-import com.androidrecord.relations.OneToOneRelation;
+import com.androidrecord.associations.BelongsTo;
+import com.androidrecord.associations.HasMany;
+import com.androidrecord.associations.HasOne;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -46,41 +46,41 @@ public class Query<T extends ActiveRecordBase> {
             copyField(field, activeRecord, result);
         }
 
-        if (context.hasUnfulfilledRelations()) activeRecord.linkRelations(context);
+        if (context.hasUnfulfilledAssociations()) activeRecord.linkAssociations(context);
         return activeRecord;
     }
 
     private void copyField(Field field, T activeRecord, Cursor result) {
-        if (isRelation(field)) {
-            handleRelation(field, activeRecord, result);
+        if (isAssociation(field)) {
+            handleAssociation(field, activeRecord, result);
         } else {
             translate(field).from(result).to(activeRecord);
         }
     }
 
-    private void handleRelation(Field field, T activeRecord, Cursor result) {
+    private void handleAssociation(Field field, T activeRecord, Cursor result) {
         if (hasOne(field)) {
-            handleHasOneRelation(field, activeRecord);
+            handleHasOneAssociation(field, activeRecord);
         }
         if (belongsTo(field)) {
-            handleBelongsToRelation(field, activeRecord, result);
+            handleBelongsToAssociation(field, activeRecord, result);
         }
     }
 
-    private void handleBelongsToRelation(Field field, T activeRecord, Cursor result) {
-        String relationName = field.getName();
-        long ownerId = result.getLong(result.getColumnIndex(relationName + "_id"));
+    private void handleBelongsToAssociation(Field field, T activeRecord, Cursor result) {
+        String associationName = field.getName();
+        long ownerId = result.getLong(result.getColumnIndex(associationName + "_id"));
 
-        OneToOneRelation relation = context.oneToOneRelation(relationName, ownerId);
-        relation.connectOwned(activeRecord, ownerId);
+        OneToOneAssociation association = context.oneToOneAssociation(associationName, ownerId);
+        association.connectOwned(activeRecord, ownerId);
     }
 
-    private void handleHasOneRelation(Field field, T activeRecord) {
-        String relationName = field.getAnnotation(HasOne.class).name();
-        context.oneToOneRelation(relationName, activeRecord.id);
+    private void handleHasOneAssociation(Field field, T activeRecord) {
+        String associationName = field.getAnnotation(HasOne.class).name();
+        context.oneToOneAssociation(associationName, activeRecord.id);
     }
 
-    private boolean isRelation(Field field) {
+    private boolean isAssociation(Field field) {
         return hasOne(field) || belongsTo(field) || hasMany(field);
     }
 

@@ -2,7 +2,7 @@ package models.hierarchy;
 
 
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.BelongsTo;
+import com.androidrecord.associations.BelongsTo;
 
 public class Student extends ActiveRecordBase<Student> {
     public String name;

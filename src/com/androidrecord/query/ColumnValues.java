@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import com.androidrecord.ActiveCollection;
 import com.androidrecord.ActiveRecordBase;
 import com.androidrecord.DateTime;
-import com.androidrecord.relations.BelongsTo;
-import com.androidrecord.relations.HasOne;
+import com.androidrecord.associations.BelongsTo;
+import com.androidrecord.associations.HasOne;
 
 import java.lang.reflect.Field;
 
@@ -21,7 +21,7 @@ public class ColumnValues {
         Field[] fields = this.activeRecordBase.getClass().getFields();
         for (Field field : fields) {
             try {
-                handleRelation(field);
+                handleAssociation(field);
                 handleLong(field);
                 handleString(field);
                 handleDateTime(field);
@@ -49,8 +49,8 @@ public class ColumnValues {
         }
     }
 
-    private void handleRelation(Field field) throws IllegalAccessException {
-        if (isRelation(field)) {
+    private void handleAssociation(Field field) throws IllegalAccessException {
+        if (isAssociation(field)) {
             if (isOwned(field)) handleOwned(field);
             else handleOwning(field);
         }
@@ -102,7 +102,7 @@ public class ColumnValues {
         }
     }
 
-    private boolean isRelation(Field field) {
+    private boolean isAssociation(Field field) {
         if (ActiveRecordBase.class.isAssignableFrom(field.getType())) return true;
         return field.getType().equals(ActiveCollection.class);
     }

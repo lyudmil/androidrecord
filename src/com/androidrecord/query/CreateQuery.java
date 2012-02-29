@@ -2,7 +2,7 @@ package com.androidrecord.query;
 
 import com.androidrecord.ActiveCollection;
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.BelongsTo;
+import com.androidrecord.associations.BelongsTo;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class CreateQuery {
         return "create table " + ActiveRecordBase.tableNameFor(this.activeRecordClass) + " (" + fieldSpecifications() + ");";
     }
 
-    private static boolean representsRelation(Field field) {
+    private static boolean representsAssociation(Field field) {
         Class<?> fieldType = field.getType();
         if (ActiveRecordBase.class.isAssignableFrom(fieldType)) return true;
         return fieldType.equals(ActiveCollection.class);
@@ -39,7 +39,7 @@ public class CreateQuery {
     }
 
     private String addSpecificationFor(Field field, String fieldSpecifications) {
-        if (representsRelation(field)) {
+        if (representsAssociation(field)) {
             if (representsBelonging(field)) {
                 fieldSpecifications += ", " + field.getName() + "_id" + " " + "integer";
             }

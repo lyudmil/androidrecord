@@ -39,6 +39,7 @@ public class MockCursor implements Cursor {
 
     private void addResult(ContentValues contentValues) {
         HashMap<String, Object> recordResult = new HashMap<String, Object>();
+        recordResult.put("updated_at", null);
         for (Map.Entry<String, Object> value : contentValues.valueSet()) {
             recordResult.put(value.getKey(), value.getValue());
         }

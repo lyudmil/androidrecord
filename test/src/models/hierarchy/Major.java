@@ -2,7 +2,7 @@ package models.hierarchy;
 
 import com.androidrecord.ActiveCollection;
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.HasMany;
+import com.androidrecord.associations.HasMany;
 
 public class Major extends ActiveRecordBase<Major> {
     public String name;

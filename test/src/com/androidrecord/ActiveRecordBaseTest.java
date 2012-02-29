@@ -54,7 +54,8 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         String expectedSql = "create table example_records (" +
                 "id integer primary key autoincrement not null, " +
                 "field1 text, " +
-                "created_at varchar(19));";
+                "created_at varchar(19), " +
+                "updated_at varchar(19));";
         String sql = ActiveRecordBase.createSqlFor(ExampleRecord.class);
 
         assertEquals(expectedSql, sql);
@@ -65,7 +66,8 @@ public class ActiveRecordBaseTest extends ModelTestCase {
                 "id integer primary key autoincrement not null, " +
                 "name text, " +
                 "record_id integer, " +
-                "created_at varchar(19));";
+                "created_at varchar(19), " +
+                "updated_at varchar(19));";
 
         String sql = ActiveRecordBase.createSqlFor(SubRecord.class);
         assertEquals(expectedSql, sql);
@@ -76,7 +78,8 @@ public class ActiveRecordBaseTest extends ModelTestCase {
                 "id integer primary key autoincrement not null, " +
                 "blog_id integer, " +
                 "content text, " +
-                "created_at varchar(19));";
+                "created_at varchar(19), " +
+                "updated_at varchar(19));";
 
         String sql = ActiveRecordBase.createSqlFor(Post.class);
         assertEquals(expectedSql, sql);
@@ -153,7 +156,7 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         assertEquals(new Long(32), record.id);
     }
 
-    public void testSaveUpdatesOwnershipRelationships() throws Exception {
+    public void testSaveUpdatesOwnershipAssociations() throws Exception {
         ExampleRecord exampleRecord = new ExampleRecord();
         SubRecord subRecord = new SubRecord();
         exampleRecord.subrecord = subRecord;
@@ -163,7 +166,7 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         assertEquals(exampleRecord, subRecord.record);
     }
 
-    public void testSaveUpdatesMultipleOwnershipRelationships() throws Exception {
+    public void testSaveUpdatesMultipleOwnershipAssociations() throws Exception {
         Post post1 = new Post();
         Post post2 = new Post();
 
@@ -267,7 +270,7 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         assertEquals("id=123", db.lastQueryParameters.get("whereClause"));
     }
 
-    public void testOneToOneRelation() throws Exception {
+    public void testOneToOneAssociation() throws Exception {
         SubRecord subRecord = new SubRecord();
         subRecord.name = "subrecord";
 
@@ -314,7 +317,7 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         assertEquals(exampleRecord.tableName(), db.lastQueryParameters.get("tableName"));
     }
 
-    public void testAsJsonWithoutRelations() throws Exception {
+    public void testAsJsonWithoutAssociations() throws Exception {
         Album album = new Album();
         album.id = (long) 44;
         album.title = "Illmatic";

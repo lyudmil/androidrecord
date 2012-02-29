@@ -2,7 +2,7 @@ package models.onetomany;
 
 import com.androidrecord.ActiveCollection;
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.HasMany;
+import com.androidrecord.associations.HasMany;
 
 public class Blog extends ActiveRecordBase<Blog> {
 

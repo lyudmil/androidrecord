@@ -1,6 +1,6 @@
 package com.androidrecord;
 
-import com.androidrecord.relations.HasMany;
+import com.androidrecord.associations.HasMany;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * A collection class for active records. It provides a consistent interface to model one-to-many relationships and
+ * A collection class for active records. It provides a consistent interface to model one-to-many associations and
  * lazy loading functionality.
  *
  * @param <T>
@@ -16,14 +16,14 @@ import java.util.List;
 public class ActiveCollection<T extends ActiveRecordBase> implements Iterable<T> {
     private List<T> records = new ArrayList<T>();
     private ActiveRecordBase owner;
-    private String relationName;
+    private String associationName;
     private Class relatedType;
     private boolean loaded = false;
 
     public ActiveCollection(ActiveRecordBase owner, Field field) {
         this.owner = owner;
         HasMany annotation = field.getAnnotation(HasMany.class);
-        this.relationName = annotation.name();
+        this.associationName = annotation.name();
         relatedType = annotation.relatedType();
     }
 
@@ -63,7 +63,7 @@ public class ActiveCollection<T extends ActiveRecordBase> implements Iterable<T>
 
     private void setOwnerOn(T record) {
         try {
-            Field field = record.getClass().getField(relationName);
+            Field field = record.getClass().getField(associationName);
             field.set(record, owner);
 
         } catch (NoSuchFieldException e) {
@@ -82,7 +82,7 @@ public class ActiveCollection<T extends ActiveRecordBase> implements Iterable<T>
         if (loaded) return;
         try {
             ActiveRecordBase lookup = (ActiveRecordBase) relatedType.newInstance();
-            List<T> relatedRecords = lookup.where(relationName + "_id=" + owner.id);
+            List<T> relatedRecords = lookup.where(associationName + "_id=" + owner.id);
             for (T relatedRecord : relatedRecords) {
                 add(relatedRecord);
             }

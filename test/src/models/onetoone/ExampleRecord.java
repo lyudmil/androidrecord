@@ -1,7 +1,7 @@
 package models.onetoone;
 
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.HasOne;
+import com.androidrecord.associations.HasOne;
 
 public class ExampleRecord extends ActiveRecordBase<ExampleRecord> {
     public String field1;

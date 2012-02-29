@@ -1,7 +1,7 @@
 package models.onetoone;
 
 import com.androidrecord.ActiveRecordBase;
-import com.androidrecord.relations.BelongsTo;
+import com.androidrecord.associations.BelongsTo;
 
 public class SubRecord extends ActiveRecordBase<SubRecord> {
     @BelongsTo

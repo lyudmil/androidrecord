@@ -1,8 +1,8 @@
 package com.androidrecord.query;
 
 import com.androidrecord.ActiveRecordBase;
+import com.androidrecord.associations.OneToOneAssociation;
 import com.androidrecord.db.Database;
-import com.androidrecord.relations.OneToOneRelation;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -10,34 +10,34 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Each time the user runs a query, it is executed in its own context to resolve all the one-to-one relationships for
- * that record. One-to-many relationships are lazily loaded and are handled differently.
+ * Each time the user runs a query, it is executed in its own context to resolve all the one-to-one associations for
+ * that record. One-to-many associations are lazily loaded and are handled differently.
  *
  * @see com.androidrecord.ActiveCollection
  */
 public class QueryContext<T extends ActiveRecordBase> {
     private Database database;
     private T record;
-    private Map<String, OneToOneRelation> oneToOneRelations;
+    private Map<String, OneToOneAssociation> oneToOneAssociations;
 
     public QueryContext(Database database, T record) {
         this.database = database;
         this.record = record;
-        oneToOneRelations = new HashMap<String, OneToOneRelation>();
+        oneToOneAssociations = new HashMap<String, OneToOneAssociation>();
     }
 
     public T find(String whereClause) {
         return new FindQuery<T>(this, database, record, whereClause).run();
     }
 
-    public OneToOneRelation oneToOneRelation(String relationName, Long ownerId) {
-        String relationIdentifier = identifierFor(relationName, ownerId);
-        if (oneToOneRelations.get(relationIdentifier) == null) oneToOneRelations.put(relationIdentifier, new OneToOneRelation(relationName, ownerId));
-        return oneToOneRelations.get(relationIdentifier);
+    public OneToOneAssociation oneToOneAssociation(String associationName, Long ownerId) {
+        String associationIdentifier = identifierFor(associationName, ownerId);
+        if (oneToOneAssociations.get(associationIdentifier) == null) oneToOneAssociations.put(associationIdentifier, new OneToOneAssociation(associationName, ownerId));
+        return oneToOneAssociations.get(associationIdentifier);
     }
 
-    private String identifierFor(String relationName, Long ownerId) {
-        return relationName + "#" + ownerId;
+    private String identifierFor(String associationName, Long ownerId) {
+        return associationName + "#" + ownerId;
     }
 
     public List<T> all() {
@@ -48,15 +48,15 @@ public class QueryContext<T extends ActiveRecordBase> {
         return new FindQuery<T>(this, database, (T) owned, whereClause).run();
     }
 
-    public OneToOneRelation getOneToOneOwnershipRelation(ActiveRecordBase owner, String relationName) {
-        String relationIdentifier = identifierFor(relationName, owner.id);
-        return oneToOneRelations.get(relationIdentifier);
+    public OneToOneAssociation getOneToOneOwnershipAssociation(ActiveRecordBase owner, String associationName) {
+        String associationIdentifier = identifierFor(associationName, owner.id);
+        return oneToOneAssociations.get(associationIdentifier);
     }
 
-    public OneToOneRelation getOneToOneRelationOwning(ActiveRecordBase ownedEntity, Field field) {
-        for (OneToOneRelation relation : oneToOneRelations.values()) {
-            if (relation.getOwned() == ownedEntity && relation.getName().equals(field.getName())) {
-                return relation;
+    public OneToOneAssociation getOneToOneAssociationOwning(ActiveRecordBase ownedEntity, Field field) {
+        for (OneToOneAssociation association : oneToOneAssociations.values()) {
+            if (association.getOwned() == ownedEntity && association.getName().equals(field.getName())) {
+                return association;
             }
         }
         return null;
@@ -66,9 +66,9 @@ public class QueryContext<T extends ActiveRecordBase> {
         return new SelectQuery<T>(this, database, lookupInstance, whereClause).run();
     }
 
-    public boolean hasUnfulfilledRelations() {
-        for (OneToOneRelation oneToOneRelation : oneToOneRelations.values()) {
-            if (!oneToOneRelation.isFulfilled()) return true;
+    public boolean hasUnfulfilledAssociations() {
+        for (OneToOneAssociation oneToOneAssociation : oneToOneAssociations.values()) {
+            if (!oneToOneAssociation.isFulfilled()) return true;
         }
         return false;
     }
