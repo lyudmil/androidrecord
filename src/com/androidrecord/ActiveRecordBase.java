@@ -246,6 +246,10 @@ public abstract class ActiveRecordBase<T extends ActiveRecordBase> {
         prototype.put(field.getName() + "_id", owningRecord.id);
     }
 
+    public static boolean isProperlyConfigured() {
+        return database != null && context != null;
+    }
+
     private static class FieldComparator implements Comparator<Field> {
         public int compare(Field field1, Field field2) {
             if (field1.getName().equals("id")) return -1;

@@ -50,6 +50,20 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         blog.posts.addAll(post1, post2);
     }
 
+    public void testCanTellIfImproperlyConfigured() throws Exception {
+        ActiveRecordBase.bootStrap(null, context);
+        assertFalse(ActiveRecordBase.isProperlyConfigured());
+
+        ActiveRecordBase.bootStrap(db, null);
+        assertFalse(ActiveRecordBase.isProperlyConfigured());
+
+        ActiveRecordBase.bootStrap(null, null);
+        assertFalse(ActiveRecordBase.isProperlyConfigured());
+
+        ActiveRecordBase.bootStrap(db, context);
+        assertTrue(ActiveRecordBase.isProperlyConfigured());
+    }
+
     public void testGeneratesSqlToCreateTable() throws Exception {
         String expectedSql = "create table example_records (" +
                 "id integer primary key autoincrement not null, " +
