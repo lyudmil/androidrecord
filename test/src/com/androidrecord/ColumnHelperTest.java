@@ -22,4 +22,9 @@ public class ColumnHelperTest extends TestCase {
         assertEquals("integer", ColumnHelper.sqlTypeFor(Boolean.class));
         assertEquals("integer", ColumnHelper.sqlTypeFor(boolean.class));
     }
+
+    public void testSqlTypeForLong() throws Exception {
+        assertEquals("integer", ColumnHelper.sqlTypeFor(Long.class));
+        assertEquals("integer", ColumnHelper.sqlTypeFor(long.class));
+    }
 }

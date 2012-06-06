@@ -70,6 +70,7 @@ public class ActiveRecordBaseTest extends ModelTestCase {
                 "field1 text, " +
                 "created_at varchar(19), " +
                 "updated_at varchar(19));";
+
         String sql = ActiveRecordBase.createSqlFor(ExampleRecord.class);
 
         assertEquals(expectedSql, sql);
