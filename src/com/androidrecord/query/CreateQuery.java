@@ -17,7 +17,14 @@ public class CreateQuery {
     }
 
     public String build() {
-        return "create table " + ActiveRecordBase.tableNameFor(this.activeRecordClass) + " (" + fieldSpecifications() + ");";
+        try {
+            ActiveRecordBase model = activeRecordClass.newInstance();
+            return "create table " + model.tableName() + " (" + fieldSpecifications() + ");";
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static boolean representsAssociation(Field field) {
