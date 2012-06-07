@@ -7,8 +7,9 @@ import com.androidrecord.db.Database;
 import java.util.List;
 
 public abstract class MultiValuedQuery<T extends ActiveRecordBase> extends Query<T> {
-    public MultiValuedQuery(QueryContext<T> context, T activeRecordInstance, Database database) {
-        super(context, activeRecordInstance, database);
+
+    public MultiValuedQuery(QueryContext<T> context, Class<T> modelClass, Database database) {
+        super(context, modelClass, database);
     }
 
     public List<T> run() {

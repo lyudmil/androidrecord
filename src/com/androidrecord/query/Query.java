@@ -16,12 +16,12 @@ import static com.androidrecord.query.ResultSetFieldTranslator.translate;
 
 public class Query<T extends ActiveRecordBase> {
     Database database;
-    T activeRecordInstance;
+    Class<T> modelClass;
     private QueryContext<T> context;
 
-    public Query(QueryContext<T> context, T activeRecordInstance, Database database) {
+    public Query(QueryContext<T> context, Class<T> modelClass, Database database) {
         this.context = context;
-        this.activeRecordInstance = activeRecordInstance;
+        this.modelClass = modelClass;
         this.database = database;
     }
 
@@ -99,7 +99,7 @@ public class Query<T extends ActiveRecordBase> {
     private T newRecord() {
         T activeRecord;
         try {
-            activeRecord = (T) activeRecordInstance.getClass().newInstance();
+            activeRecord = (T) modelClass.newInstance();
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {

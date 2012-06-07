@@ -36,7 +36,7 @@ public abstract class ModelTestCase<T extends ActiveRecordBase> extends Instrume
 
     public void assertUpdated(ActiveRecordBase record) {
         assertTrue(db.updateCalled);
-        assertEquals(record.tableName(), db.lastQueryParameters.get("tableName"));
+        assertEquals(ActiveRecordBase.tableNameFor(record.getClass()), db.lastQueryParameters.get("tableName"));
         assertEquals(record.contentValues(), db.lastQueryParameters.get("contentValues"));
         assertEquals("id=" + record.id, db.lastQueryParameters.get("whereClause"));
     }

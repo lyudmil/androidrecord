@@ -17,17 +17,17 @@ import java.util.Map;
  */
 public class QueryContext<T extends ActiveRecordBase> {
     private Database database;
-    private T record;
     private Map<String, OneToOneAssociation> oneToOneAssociations;
+    private Class<T> modelClass;
 
-    public QueryContext(Database database, T record) {
+    public QueryContext(Database database, Class<T> modelClass) {
         this.database = database;
-        this.record = record;
+        this.modelClass = modelClass;
         oneToOneAssociations = new HashMap<String, OneToOneAssociation>();
     }
 
     public T find(String whereClause) {
-        return new FindQuery<T>(this, database, record, whereClause).run();
+        return new FindQuery<T>(this, database, modelClass, whereClause).run();
     }
 
     public OneToOneAssociation oneToOneAssociation(String associationName, Long ownerId) {
@@ -41,11 +41,11 @@ public class QueryContext<T extends ActiveRecordBase> {
     }
 
     public List<T> all() {
-        return new SelectAllQuery<T>(this, database, record).run();
+        return new SelectAllQuery<T>(this, database, modelClass).run();
     }
 
     public T findRelated(ActiveRecordBase owned, String whereClause) {
-        return new FindQuery<T>(this, database, (T) owned, whereClause).run();
+        return new FindQuery<T>(this, database, (Class<T>) owned.getClass(), whereClause).run();
     }
 
     public OneToOneAssociation getOneToOneOwnershipAssociation(ActiveRecordBase owner, String associationName) {
@@ -62,8 +62,8 @@ public class QueryContext<T extends ActiveRecordBase> {
         return null;
     }
 
-    private List select(ActiveRecordBase lookupInstance, String whereClause) {
-        return new SelectQuery<T>(this, database, lookupInstance, whereClause).run();
+    private List select(Class<T> modelClass, String whereClause) {
+        return new SelectQuery<T>(this, database, modelClass, whereClause).run();
     }
 
     public boolean hasUnfulfilledAssociations() {
@@ -74,6 +74,6 @@ public class QueryContext<T extends ActiveRecordBase> {
     }
 
     public List<T> where(String whereClause) {
-        return select(record, whereClause);
+        return select(modelClass, whereClause);
     }
 }

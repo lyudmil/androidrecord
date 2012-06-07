@@ -5,10 +5,12 @@ import com.androidrecord.ActiveRecordBase;
 import com.androidrecord.db.Database;
 
 public class FindQuery<T extends ActiveRecordBase> extends Query<T> {
+    private Class<T> modelClass;
     private String whereClause;
 
-    public FindQuery(QueryContext<T> context, Database database, T activeRecordInstance, String whereClause) {
-        super(context, activeRecordInstance, database);
+    public FindQuery(QueryContext<T> context, Database database, Class<T> modelClass, String whereClause) {
+        super(context, modelClass, database);
+        this.modelClass = modelClass;
         this.whereClause = whereClause;
     }
 
@@ -20,9 +22,9 @@ public class FindQuery<T extends ActiveRecordBase> extends Query<T> {
     }
 
     private Cursor queryResult() {
-        Cursor result = database.select(activeRecordInstance.tableName(), whereClause);
+        Cursor result = database.select(ActiveRecordBase.tableNameFor(modelClass), whereClause);
         if (result.getCount() > 1)
-            throw new RuntimeException("Got " + result.getCount() + " results for " + activeRecordInstance.getClass().getSimpleName() + " [" + whereClause + "]");
+            throw new RuntimeException("Got " + result.getCount() + " results for " + modelClass.getSimpleName() + " [" + whereClause + "]");
         result.moveToFirst();
         return result;
     }

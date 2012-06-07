@@ -10,6 +10,7 @@ import models.onetomany.Blog;
 import models.onetomany.Post;
 import models.onetoone.ExampleRecord;
 import models.onetoone.SubRecord;
+import models.tablename.Authentication;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -104,8 +105,9 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         assertEquals("example_records", ActiveRecordBase.tableNameFor(ExampleRecord.class));
     }
 
-    public void testRecordsKnowTheirTableName() {
-        assertEquals("example_records", new ExampleRecord().tableName());
+    public void testRecordsCanOverrideTheirDefaultTableName() {
+        assertEquals("credentials", ActiveRecordBase.tableNameFor(Authentication.class));
+
     }
 
     public void testRecordsCanCalculateTheirContentValues() {
@@ -329,7 +331,7 @@ public class ActiveRecordBaseTest extends ModelTestCase {
         exampleRecord.compactId();
 
         assertTrue(db.compactIdCalled);
-        assertEquals(exampleRecord.tableName(), db.lastQueryParameters.get("tableName"));
+        assertEquals(ActiveRecordBase.tableNameFor(exampleRecord.getClass()), db.lastQueryParameters.get("tableName"));
     }
 
     public void testAsJsonWithoutAssociations() throws Exception {

@@ -38,7 +38,7 @@ public class AssociationResolverTest extends TestCase {
 
     public void testCanBuildUpContextForEstablishingAssociations() throws Exception {
         ExampleRecord record = new ExampleRecord();
-        QueryContext queryContext = new QueryContext<ExampleRecord>(null, record);
+        QueryContext queryContext = new QueryContext<ExampleRecord>(null, ExampleRecord.class);
 
         for (AssociationResolver resolver : values()) {
             assertEquals(resolver, resolver.on(record).within(queryContext));

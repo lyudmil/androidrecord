@@ -6,12 +6,12 @@ import com.androidrecord.db.Database;
 
 public class SelectAllQuery<T extends ActiveRecordBase> extends MultiValuedQuery<T> {
 
-    public SelectAllQuery(QueryContext<T> context, Database database, T activeRecordInstance) {
-        super(context, activeRecordInstance, database);
+    public SelectAllQuery(QueryContext<T> context, Database database, Class<T> modelClass) {
+        super(context, modelClass, database);
     }
 
     @Override
     protected Cursor select() {
-        return database.selectAll(activeRecordInstance.tableName());
+        return database.selectAll(ActiveRecordBase.tableNameFor(modelClass));
     }
 }
