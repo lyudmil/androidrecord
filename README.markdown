@@ -14,7 +14,8 @@ Then, look up your favorite IDE's instructions on how to add a library project f
 Using AndroidRecord
 ===================
 
-1. Set up the database
+Set up the database
+---
 
 To start using AndroidRecord within your project, you need to first create a database. To do that, run the following code in an activity of your choice (I suggest your root activity):
 
@@ -27,7 +28,8 @@ This does the following:
 - Looks up the resource R.string.app_name (which you ought to already have defined), converts its name to its underscored version, and creates a database with that name unless it already exists. If it already exists, it just uses it.
 - Checks to see if there are any migrations to run. More on that later.
 
-2. Create your first model
+Create your first model
+---
 
 AndroidRecord is based on the [Active Record pattern](http://en.wikipedia.org/wiki/Active_record_pattern), so every model class represents the table schema, while every instance of the class is mapped to a row in the database.
 
@@ -63,7 +65,8 @@ Run this test and it should fail, spitting out the required SQL. Create `assets/
 CRUD
 ====
 
-1. Create
+Create
+---
 
 To insert a new model into the database, all you have to do is call the `ActiveRecordBase.save()` method on the instance you want. So, following our Course example, use the following code:
 
@@ -75,7 +78,8 @@ course.save();
 
 That's all.
 
-2. Read
+Read
+---
 
 There are several ways to read the database. If you know the ID of the record you want to look up:
 
@@ -103,11 +107,13 @@ List<Course> duplicates = new Course().where("name='Artificial Intelligence'");
 
 Pretty simple, right?
 
-3. Update
+Update
+---
 
 Updating a record works the same way inserting does. ActiveRecord checks to see if the record has already been saved to the database and issues an update query instead of a create one if it has been. So, to update records, look them up, change them in your code, and call `ActiveRecordBase.save()` when you're done.
 
-4. Delete
+Delete
+---
 
 It's also pretty simple:
 
@@ -118,7 +124,8 @@ course.destroy()
 Associations
 ============
 
-1. One-to-many
+One-to-many
+---
 
 One-to-many associations in ActiveRecord a bidirectional. So, let's say we wanted all of our courses to be taught by exactly one teacher. First, create the `Teacher` class and indicate that it's a one-to-many relationship:
 
@@ -133,6 +140,7 @@ public class Teacher extends Person<Teacher> {
 ```
 
 There are two pieces of information you need to provide to the `@HasMany` annotation:
+
 - name: the name of the field on the class on the "many" side of the association (`Course`) that represents the current class (`Teacher`). So, we're saying that the teacher of a course is represented by the `teacher` field on the `Course` class.
 
 - relatedType: which class is on the "many" side of the association.
@@ -152,11 +160,13 @@ public class Course extends ActiveRecordBase<Course> {
 
 We also need to write another migration to add a column called `teacher_id` to the `courses` table (our unit test should tell us that). Then, we're all set. We can use the `lectures` field just like any other collection. The only gotcha is that the owner of a collection *must be saved before* any of the owned entities. So, if a `Teacher` hasn't been saved, you won't be able to save any of their `Course`'s without AndroidRecord spitting out errors at you.
 
-2. One-to-one
+One-to-one
+---
 
 One-to-one relations are much simpler to implement. Simply add a `@BelongsTo` annotation to the field of the owning class and add a database column to represent the relation (like what we did above with courses). You're strongly encouraged to use a unit test as a guide so that you get all the SQL right. It's not complicated, but why would you waste brain cycles thinking about it?
 
-3. One-to-many
+One-to-many
+---
 
 AndroidRecord doesn't currently support one-to-many associations. If you need to have one, you need to model it explicitly. Create a model that has a one-to-many relationship to each side of the many-to-many association you want to implement. So, continuing our courses example, modeling student enrollments in courses:
 
