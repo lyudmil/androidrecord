@@ -18,8 +18,10 @@ Using AndroidRecord
 
 To start using AndroidRecord within your project, you need to first create a database. To do that, run the following code in an activity of your choice (I suggest your root activity):
 
-    DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
-    databaseManager.bootStrapDatabase();
+```java
+DatabaseManager databaseManager = new DatabaseManager(getApplicationContext());
+databaseManager.bootStrapDatabase();
+```
 
 This does the following:
 - Looks up the resource R.string.app_name (which you ought to already have defined), converts its name to its underscored version, and creates a database with that name unless it already exists. If it already exists, it just uses it.
@@ -31,13 +33,15 @@ AndroidRecord is based on the [Active Record pattern](http://en.wikipedia.org/wi
 
 So, the first step is to create a class that extends `ActiveRecordBase` and define the fields that are going to go in the table:
 
-    public class Course extends ActiveRecordBase<Course> {
+```java
+public class Course extends ActiveRecordBase<Course> {
 
-        public String name;	// All field that you wish saved to the database must be declared public
-        public String description;
+    public String name;	// All field that you wish saved to the database must be declared public
+    public String description;
 
-        // More code...
-    }
+    // More code...
+}
+```
 
 Then, you need to create the corresponding table in the database. 
 
@@ -45,12 +49,14 @@ To do this, you have to create your first migration. Migrations are a way of ver
 
 So, we must create a table for the `Course` class we defined above. The suggested way of doing this is by first creating a unit test:
 
-    public class CourseTest extends ModelTestCase<Course> {	// ModelTestCase is a class provided in ActiveRecord
+```java
+public class CourseTest extends ModelTestCase<Course> {	// ModelTestCase is a class provided in ActiveRecord
 
-        public void testFirstMigrationCreatesCoursesTable() throws Exception {
-            assertDatabaseTableCreated(Course.class, 1); // Check that migration 1.sql contains the SQL required to create a table for the Course class
-        }
+    public void testFirstMigrationCreatesCoursesTable() throws Exception {
+        assertDatabaseTableCreated(Course.class, 1); // Check that migration 1.sql contains the SQL required to create a table for the Course class
     }
+}
+```
 
 Run this test and it should fail, spitting out the required SQL. Create `assets/migrations/1.sql` and paste that SQL. Run the test again and it should pass. You're now all set to do CRUD operations on courses.
 
@@ -61,29 +67,39 @@ CRUD
 
 To insert a new model into the database, all you have to do is call the `ActiveRecordBase.save()` method on the instance you want. So, following our Course example, use the following code:
 
-    Course course = new Course();
-    course.name = "Artificial Intelligence";
-	course.save();
-	
+```java
+Course course = new Course();
+course.name = "Artificial Intelligence";
+course.save();
+```
+
 That's all.
 
 2. Read
 
 There are several ways to read the database. If you know the ID of the record you want to look up:
 
-    Course savedCourse = new Course().find(1);
+```java
+Course savedCourse = new Course().find(1);
+```
 
 If you want to get all the courses:
 
-    List<Course> all = new Course().all();
+```java
+List<Course> all = new Course().all();
+```
 
 The first course that matches a particular where clause:
 
-    Course ai = new Course().find("name='Artificial Intelligence'");
+```java
+Course ai = new Course().find("name='Artificial Intelligence'");
+```
 
 All courses that match a particular where clause:
 
-    List<Course> duplicates = new Course().where("name='Artificial Intelligence'");
+```java
+List<Course> duplicates = new Course().where("name='Artificial Intelligence'");
+```
 
 Pretty simple, right?
 
@@ -95,7 +111,9 @@ Updating a record works the same way inserting does. ActiveRecord checks to see 
 
 It's also pretty simple:
 
-    course.destroy()
+```java
+course.destroy()
+```
 
 Associations
 ============
@@ -104,13 +122,15 @@ Associations
 
 One-to-many associations in ActiveRecord a bidirectional. So, let's say we wanted all of our courses to be taught by exactly one teacher. First, create the `Teacher` class and indicate that it's a one-to-many relationship:
 
-    public class Teacher extends Person<Teacher> {
-        public String name;
-        public String title;
+```java
+public class Teacher extends Person<Teacher> {
+    public String name;
+    public String title;
 
-        @HasMany(name = "teacher", relatedType = Course.class)
-        public ActiveCollection<Course> lectures;		// Use ActiveCollection for collections you want to persist
-    }
+    @HasMany(name = "teacher", relatedType = Course.class)
+    public ActiveCollection<Course> lectures;		// Use ActiveCollection for collections you want to persist
+}
+```
 
 There are two pieces of information you need to provide to the `@HasMany` annotation:
 - name: the name of the field on the class on the "many" side of the association (`Course`) that represents the current class (`Teacher`). So, we're saying that the teacher of a course is represented by the `teacher` field on the `Course` class.
@@ -119,14 +139,16 @@ There are two pieces of information you need to provide to the `@HasMany` annota
 
 We also need to modify the `Course` class:
 
-    public class Course extends ActiveRecordBase<Course> {
-        // Previous field declarations
+```java
+public class Course extends ActiveRecordBase<Course> {
+    // Previous field declarations
 
-        @BelongsTo
-        public Teacher teacher;
+    @BelongsTo
+    public Teacher teacher;
 
-        // More code...
-    }
+    // More code...
+}
+```
 
 We also need to write another migration to add a column called `teacher_id` to the `courses` table (our unit test should tell us that). Then, we're all set. We can use the `lectures` field just like any other collection. The only gotcha is that the owner of a collection *must be saved before* any of the owned entities. So, if a `Teacher` hasn't been saved, you won't be able to save any of their `Course`'s without AndroidRecord spitting out errors at you.
 
@@ -138,14 +160,16 @@ One-to-one relations are much simpler to implement. Simply add a `@BelongsTo` an
 
 AndroidRecord doesn't currently support one-to-many associations. If you need to have one, you need to model it explicitly. Create a model that has a one-to-many relationship to each side of the many-to-many association you want to implement. So, continuing our courses example, modeling student enrollments in courses:
 
-    public class Enrollment extends ActiveRecordBase<Enrollment> {
+```java
+public class Enrollment extends ActiveRecordBase<Enrollment> {
 
-        @BelongsTo
-        public Student student;
+    @BelongsTo
+    public Student student;
 
-        @BelongsTo
-        public Course course;
-    }
+    @BelongsTo
+    public Course course;
+}
+```
 
 Then, you've reduced the many-to-many relationship to two one-to-many relationships.
 
