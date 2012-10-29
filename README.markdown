@@ -25,7 +25,9 @@ databaseManager.bootStrapDatabase();
 ```
 
 This does the following:
-- Looks up the resource R.string.app_name (which you ought to already have defined), converts its name to its underscored version, and creates a database with that name unless it already exists. If it already exists, it just uses it.
+
+- Looks up the resource `R.string.app_name` (which you ought to already have defined), converts its name to its underscored version, and creates a database with that name unless it already exists. If it already exists, it just uses it.
+
 - Checks to see if there are any migrations to run. More on that later.
 
 Create your first model
@@ -64,6 +66,8 @@ Run this test and it should fail, spitting out the required SQL. Create `assets/
 
 CRUD
 ====
+
+Here's where this starts paying off...
 
 Create
 ---
@@ -115,11 +119,13 @@ Updating a record works the same way inserting does. ActiveRecord checks to see 
 Delete
 ---
 
-It's also pretty simple:
+Couldn't be simpler:
 
 ```java
 course.destroy()
 ```
+
+Any questions? Of course not.
 
 Associations
 ============
