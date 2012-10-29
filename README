@@ -33,7 +33,7 @@ So, the first step is to create a class that extends `ActiveRecordBase` and defi
 
     public class Course extends ActiveRecordBase<Course> {
 
-        public String name;			// All field that you wish saved to the database must be declared public
+        public String name;	// All field that you wish saved to the database must be declared public
         public String description;
 
         // More code...
@@ -45,10 +45,10 @@ To do this, you have to create your first migration. Migrations are a way of ver
 
 So, we must create a table for the `Course` class we defined above. The suggested way of doing this is by first creating a unit test:
 
-    public class CourseTest extends ModelTestCase<Course> {		// ModelTestCase is a class provided in ActiveRecord
+    public class CourseTest extends ModelTestCase<Course> {	// ModelTestCase is a class provided in ActiveRecord
 
         public void testFirstMigrationCreatesCoursesTable() throws Exception {
-            assertDatabaseTableCreated(Course.class, 1);		// Check that migration 1.sql contains the SQL required to create a table for the Course class
+            assertDatabaseTableCreated(Course.class, 1); // Check that migration 1.sql contains the SQL required to create a table for the Course class
         }
     }
 
