@@ -1,0 +1,8 @@
+com.androidrecord
+com.androidrecord.associations
+com.androidrecord.db
+com.androidrecord.migrations
+com.androidrecord.query
+com.androidrecord.test
+com.androidrecord.test.mocks
+com.androidrecord.utils
