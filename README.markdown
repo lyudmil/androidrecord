@@ -164,7 +164,7 @@ public class Course extends ActiveRecordBase<Course> {
 }
 ```
 
-We also need to write another migration to add a column called `teacher_id` to the `courses` table (our unit test should tell us that). Then, we're all set. We can use the `lectures` field just like any other collection. The only gotcha is that the owner of a collection *must be saved before* any of the owned entities. So, if a `Teacher` hasn't been saved, you won't be able to save any of their `Course`'s without AndroidRecord spitting out errors at you.
+We also need to write another migration to add a column called `teacher_id` to the `courses` table (our unit test should tell us that). Then, we're all set. We can use the `lectures` field just like any other collection. The only gotcha is that the owner of a collection *must be saved before any of the owned entities*. So, if a `Teacher` hasn't been saved, you won't be able to save any of their `Course`'s without AndroidRecord spitting out errors at you.
 
 One-to-one
 ---
