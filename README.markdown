@@ -40,7 +40,7 @@ So, the first step is to create a class that extends `ActiveRecordBase` and defi
 ```java
 public class Course extends ActiveRecordBase<Course> {
 
-    public String name;	// All field that you wish saved to the database must be declared public
+    public String name;	// All fields you wish to save to the database must be declared public
     public String description;
 
     // More code...
