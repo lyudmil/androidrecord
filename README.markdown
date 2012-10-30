@@ -136,7 +136,7 @@ One-to-many
 One-to-many associations in ActiveRecord a bidirectional. So, let's say we wanted all of our courses to be taught by exactly one teacher. First, create the `Teacher` class and indicate that it's a one-to-many relationship:
 
 ```java
-public class Teacher extends Person<Teacher> {
+public class Teacher extends ActiveRecordBase<Teacher> {
     public String name;
     public String title;
 
